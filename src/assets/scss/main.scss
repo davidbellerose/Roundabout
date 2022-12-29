@@ -1,0 +1,38 @@
+@use 'colors';
+@use '_footer';
+@use 'prism';
+
+
+body{
+  color: var(--primary-color);
+}
+
+nav{
+  background-color: var(--dark-color);
+}
+
+
+h1,h2,h3,h4,h5,h6{
+  color: var(--primary-color);
+}
+
+main .container {
+  padding: 60px 15px 0;
+  margin-bottom: 5rem;
+}
+
+.checklist>li i{
+   color: var(--secondary-color);
+}
+
+.project-icons img{
+  height: 50px;
+  width: auto;
+}
+
+code[class*="language-"],
+pre[class*="language-"] {
+white-space: pre-wrap;
+word-break: break-all;
+word-wrap: break-word;
+}
