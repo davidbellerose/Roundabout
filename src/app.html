@@ -2,7 +2,7 @@
 <html lang="en" class="h-100">
 
 <head>
-    <title>App Name: A Coding Project By David Bellerose</title>
+    <title>RoundAbout: A Coding Project By David Bellerose</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,7 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link href="assets/css/main.css" rel="stylesheet">
-    <link href="assets/img/favicon_a.webp" rel="icon">
+    <link href="assets/img/favicon_a.svg" rel="icon">
     <script src="https://kit.fontawesome.com/45e2949365.js" crossorigin="anonymous"></script>
 </head>
 
@@ -19,7 +19,7 @@
 <!-- NAV  -->
     <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img src="assets/img/favicon_a.svg" class="d-inline-block align-text-top me-2">APP NAME</a>
+        <a class="navbar-brand" href="#"><img src="assets/img/favicon_a.svg" class="d-inline-block align-text-top me-2">RoundAbout</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
             aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -49,7 +49,80 @@
 
 <!-- MAIN -->
 <main class="flex-shrink-0 mt-5">
-  <div class="container"></div>
+  <div class="container">
+    <div class="row row-cols-1 row-cols-lg-2">
+        <div class="col-lg-4 border-end border-2">
+            <h1>RoundAbout: A Coding Project</h1>
+            <h4 class="lead">This app is a modified version of the infamous FizzBuzz.</h4>
+            <p>The FizzBuzz algorithm will list a series of numbers, typically from 1 to 100.
+                It will replace any number that is a multiple of 3 with the word "Fizz".
+                It will replace numbers that are a multiple of 5 with the word "Buzz", and
+                finally replace numbers that are both a multiple of 3 and 5 with the word "FizzBuzz".
+            </p>
+            <h2 class="mt-5 border-bottom border-3">Instructions</h2>
+            <ul>
+                <li>The "Enter the starting number" and "Enter the ending number" fields
+                    will be the range of numbers you want to process. You can enter any starting
+                    number and ending number, so long as they are greater than 0, and the 
+                    starting number is larger than the ending number.
+                </li>
+                <li>The "Enter the first word" field is for you to enter any word or characters you like, which
+                    will replace the number in the first multiple(number) field.
+                </li>
+                <li>The "Enter the second word" field is for you to enter any word or characters
+                    that will replace the number in the second multiple(number) field.
+                </li>
+                <li>Click on the "Display RoundAbout" button. This will display the results of the RoundAbout.
+                    Note that any numbers that are a multiple of both the first and second multiples(numbers)
+                     will display both of the words that you entered in the word fields.
+                </li>
+                <li>You must enter valid numbers in the number fields from 1 to 100.</li>
+                <li>The Ending Number must be larger than the Starting Number.</li>
+                <li>You cannot enter a negative number.</li>
+                <li>You can only enter whole numbers, decimal numbers will be rounded down to whole numbers.</li>
+            </ul>
+        </div>
+        <div class="col-lg-8">
+            <h5>Enter Values</h5>
+            <form class="row row-cols-1 row-cols-lg-2 gy-2 gx-3">
+                <div class="col">
+                    <label>Enter the starting number.</label>
+                    <input id="startValue" min="1" max="100" type="number" class="form-control" placeholder="Start Value" value="1" aria- label="Start Value">
+                </div>
+                <div class="col">
+                    <label>Enter the ending number.</label>
+                    <input id="endValue" min="1" max="100" type="number" class="form-control" placeholder="Start Value" value="100" aria- label="Start Value">
+                </div>
+                <div class="col">
+                    <label>Enter the first word.</label>
+                    <input id="firstWord"type="text" class="form-control" placeholder="First Word" value="Round" aria- label="First Word">
+                </div>
+                <div class="col">
+                    <label>Enter the second word.</label>
+                    <input id="secondWord" type="text" class="form-control" placeholder="Second Word" value="About" aria- label="Second Word">
+                </div>
+                <div class="col">
+                    <label>Enter the multiple(number) you want replaced by the first word.</label>
+                    <input id="roundValue" min="1" max="100" type="number" class="form-control" placeholder="Round Value" value="3" aria- label="Round Value">
+                </div>
+                <div class="col">
+                    <label>Enter the multiple(number) you want replaced by the second word.</label>
+                    <input id="aboutValue" min="1" max="100" type="number" class="form-control" placeholder="About Value" value="5" aria- label="About Value">
+                </div>
+                <div class="col-12 col-lg-12 d-flex justify-content-start justify-content-lg-end">
+                    <button type="button" id="btnSubmit" class="btn btn-dark btn-lg">Display RoundAbout</button>
+                </div>
+            </form>
+            <h2 class="mt-5 border-bottom border-2">Results</h2>
+            <table class="table table-striped table-sm">
+                <tbody id="results">
+                    <!-- results go here -->
+                </tbody>
+            </table>
+            <h5 id="codeLink"></h5>
+        </div>
+    </div>
+  </div>
 </main>
 <!-- END MAIN -->
 <!-- FOOTER -->
@@ -80,6 +153,9 @@
   </div>
 </footer>
 <!-- END FOOTER -->
+<template id="raTemplate">
+    <tr><td></td></tr>
+</template>
 <!-- Scripts JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
     <script src="assets/js/main.js"></script>

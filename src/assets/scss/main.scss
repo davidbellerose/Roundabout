@@ -33,6 +33,23 @@ main .container {
 code[class*="language-"],
 pre[class*="language-"] {
 white-space: pre-wrap;
-word-break: break-all;
-word-wrap: break-word;
+word-break: normal;
+word-wrap: normal;
+}
+
+.about-value{
+  color: blue;
+}
+
+.round-value{
+  color: #FF70FF;
+  color: red;
+}
+
+.roundabout{
+  font-weight: bold;
+  color: orange;
+}
+.font-normal{
+  font-weight: 400;
 }
