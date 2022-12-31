@@ -54,11 +54,39 @@
         <div class="col-lg-8">
             <pre class="line-numbers">
                 <code class="language-javascript">
-// The event listener for the button.
-document.getElementById("btnSubmit").addEventListener("click", getValues);
+// This first section of code handles the drop down list and button
+// It will determine which code version was selected and pass that
+//   to the getValues function via an argument.
+
+const btn = document.querySelector('#btnSubmit');
+const sb = document.querySelector('#inputGroupSelect');
+btn.onclick = (event) => {
+    let codeVersion = "";
+    event.preventDefault();
+    // show the selected index
+    switch (sb.value){
+        case "1":{
+        codeVersion = "generateResults";
+        break;
+        }
+        case "2": {
+        codeVersion = "generateResultsSwitch";
+        break;
+        }
+        case "3": {
+        codeVersion = "generateResultsTern";
+        break;
+        }
+        default :{
+        codeVersion = "generateResults";
+        break;
+        }
+    }
+    getValues(codeVersion);
+};
 
 // Get the values from the page.
-function getValues() {
+function getValues(codeVersion) {
     let startValue = document.getElementById("startValue").value;
     let endValue = document.getElementById("endValue").value;
     let firstWord = document.getElementById("firstWord").value;
@@ -86,24 +114,25 @@ function getValues() {
     alert("Please choose an about number between 1 and 100");
 
     // Check to make sure the ending number is larger than the starting number.
-    } else if (endValue > startValue) {
+    } else if (startValue >= endValue) {
     alert("The starting number has to be smaller than the ending number");
 
     } else {
     // Call the generateResults function with all the values
-    //     passed via the arguments and assign it to the results variable.
-    let results = generateResults(startValue, endValue, firstWord, secondWord, roundValue, aboutValue);
+    //    passed via the arguments and assign it to the results variable.
+    // Note that the version of the code you chose will insert the appropriate function name.
+    let results = eval(codeVersion)(startValue, endValue, firstWord, secondWord, roundValue, aboutValue);
 
     // Call the displayResults function and pass the results arguments to it.
     displayResults(results, firstWord, secondWord, roundValue, aboutValue);
     }
 }
 
+// The If/Then/Else version of the generate results function (default)
 // This function generates the number series in between the number values and assigns them to an array.
 //     Then it will switch the multiples of the number fields to the word fields.
 function generateResults(sValue, eValue, fWord, sWord, rValue, aValue) {
     let raValue = rValue * aValue;
-    console.log(raValue);
     let results = [];
     for (let i = sValue; i &lt;= eValue; i++) {
     if(i % raValue === 0){
@@ -114,6 +143,51 @@ function generateResults(sValue, eValue, fWord, sWord, rValue, aValue) {
         results.push(sWord);
     }else{
     results.push(i);
+    }
+    }
+    return results;
+}
+
+// Ternary version of the generate results function
+function generateResultsTern(sValue, eValue, fWord, sWord, rValue, aValue){
+    let results = [];
+    for (let i = sValue; i &lt;= eValue; i++) {
+    let value = ((i % rValue === 0 ? "Round" : "") + (i % aValue === 0 ? "About" : "") || i);
+    results.push(value);
+    }
+    return results;
+}
+
+// Switch case version of the generate results function
+function generateResultsSwitch(sValue, eValue, fWord, sWord, rValue, aValue){
+    let raValue = rValue * aValue;
+    let results = [];
+    let RoundAbout = false;
+    let Round = false;
+    let About = false;
+
+    for (let i = sValue; i &lt;= eValue; i++) {
+    RoundAbout = i % raValue === 0;
+    Round = i % rValue === 0;
+    About = i % aValue === 0;
+
+    switch(true){
+        case RoundAbout:{
+        results.push("RoundAbout");
+        break;
+        }
+        case Round:{
+        results.push("Round");
+        break;
+        }
+        case About:{
+        results.push("About")
+        break;
+        }
+        default:{
+        results.push(i);
+        break;
+        }
     }
     }
     return results;
@@ -144,14 +218,18 @@ function displayResults(results, fWord, sWord) {
     }
     // The next line inserts the html into the html page.
     document.getElementById("results").innerHTML = templateRows;
-}                    
+
+    let codeLink = document.getElementById("codeLink");
+    codeLink.innerHTML = '&lt;a href="code.html">See The Code&lt;/a>'
+}                                 
                 </code>
             </pre>
         </div>
         <div class="col-lg-4">
             <h5>This code is structured in three functions.</h5>
-            <p>The first thing done was to add an event listener to the button so
-                the code will fire when the button is pressed.
+            <p>The first section of code handles the select list and button.
+                When you click the button, the version of the code you chose
+                to run will execute.
             </p>
             <p>The next getValues function gets the values from the number and text input fields.
                  It also makes
@@ -166,12 +244,14 @@ function displayResults(results, fWord, sWord) {
                 The "RoundAbout" word is the round and about words combined, and will replace
                 the multiples(numbers) that are a multiple of both the first and second place numbers,
                 15 is the number that is both a multiple of 3 and 5.
+                <br>Note that there are three versions of this code, which are the three
+                choices displayed in the dropdown list.
             </p>
             <p>The second helper function is called displayResults. This will take the
                 results in the array, put them in some html code, and then inject them
                 into the web page for display.
             </p>
-            <p>So once the getValues function gets the values from the number and text fields and
+            <p>In summary, once the getValues function gets the values from the number and text fields and
                 checks to make sure those inputs are valid, it calls the generateResults
                 function to generate the numbers array and replace the multiples with
                 the words entered in the text fields. Finally it calls the displayResults
