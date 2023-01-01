@@ -61,7 +61,12 @@ function getValues(codeVersion) {
   // Check to make sure the ending number is larger than the starting number.
   } else if (startValue >= endValue) {
     alert("The starting number has to be smaller than the ending number");
-
+    
+  // Check to make sure the word fields are filled out.
+  } else if(!firstWord){
+    alert("Please enter the first word");
+  } else if(!secondWord){
+    alert("Please enter the second word");
   } else {
     // Call the generateResults function with all the values
     //    passed via the arguments and assign it to the results variable.
