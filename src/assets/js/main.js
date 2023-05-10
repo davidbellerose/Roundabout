@@ -46,16 +46,16 @@ function getValues(codeVersion) {
   aboutValue = Math.round(parseInt(aboutValue));
 
   // Check to see if the numbers ar between 1 and 100 and not a negative number
-  if ((startValue < 1 && startValue > 100) || Math.sign(startValue) === -1) {
+  if ((startValue < 1 || startValue > 100) || Math.sign(startValue) === -1) {
     alert("Please choose a starting number between 1 and 100");
 
-  } else if ((endValue < 1 && endValue > 100) || Math.sign(endValue) === -1) {
+  } else if ((endValue < 1 || endValue > 100) || Math.sign(endValue) === -1) {
     alert("Please choose an ending number between 1 and 100");
     
-  }else if ((roundValue < 1 && roundValue > 100) || Math.sign(roundValue) === -1) {
+  }else if ((roundValue < 1 || roundValue > 100) || Math.sign(roundValue) === -1) {
     alert("Please choose a round number between 1 and 100");
 
-  } else if ((aboutValue < 1 && aboutValue > 100) || Math.sign(aboutValue) === -1) {
+  } else if ((aboutValue < 1 || aboutValue > 100) || Math.sign(aboutValue) === -1) {
     alert("Please choose an about number between 1 and 100");
 
   // Check to make sure the ending number is larger than the starting number.
@@ -77,6 +77,16 @@ function getValues(codeVersion) {
     displayResults(results, firstWord, secondWord, roundValue, aboutValue);
   }
 }
+
+// this validates the inputs for non number characters
+const inps=document.querySelectorAll("input.check");
+inps.forEach(inp=>{
+ inp.addEventListener("change",()=>{
+   let v = inp.value;
+   if(isNaN(parseFloat(v)))
+      alert("Please enter a number between 1 and 100");
+ });
+})
 
 // The If/Then/Else version of the generate results function (default)
 // This function generates the number series in between the number values and assigns them to an array.
@@ -172,3 +182,7 @@ function displayResults(results, fWord, sWord) {
   let codeLink = document.getElementById("codeLink");
   codeLink.innerHTML = '<a href="code.html">See The Code</a>'
 }
+
+
+
+
