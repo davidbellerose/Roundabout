@@ -1,6 +1,6 @@
 # RoundAbout
 
-## An javascript version of the infamous FizzBuzz algorithm.
+## An customizable javascript version of the infamous FizzBuzz algorithm.
 
  - CSS SASS Bootstrap Node.js Layout
  - Javascript Fundamentals
