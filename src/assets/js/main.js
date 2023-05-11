@@ -39,6 +39,10 @@ function getValues(codeVersion) {
   let roundValue = document.getElementById("roundValue").value;
   let aboutValue = document.getElementById("aboutValue").value;
 
+  // prevent html script injection on string fields
+  firstWord = firstWord.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  secondWord = secondWord.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
   // Change the values of the number fields to integers and round them to whole numbers.
   startValue = Math.round(parseInt(startValue));
   endValue = Math.round(parseInt(endValue));
